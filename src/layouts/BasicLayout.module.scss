@@ -1,0 +1,27 @@
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.nav_header {
+  padding: 0;
+}
+
+.nav_header_list {
+  list-style: none;
+  float: right;
+}
+
+.nav_header_heading {
+  display: inline;
+}
+
+.nav_link {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.content_container {
+  margin-top: 2rem;
+}

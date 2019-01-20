@@ -1,0 +1,44 @@
+---
+title: "Markdown syntax"
+date: "2011-11-13"
+---
+
+#Hello
+.我是中国.
+date: "2011-11-13"
+
+<table>
+	<tr>
+	<td>Foo</td>
+	</tr>
+</table>
+
+&copy;  
+This is an H1
+==============
+##This is an H2
+>this is a blockquote with two paragraphs
+
+
++ a
++ b
++ a
+
+##hehe
+1. 我爱你
+2. 我真的爱你
+3. 我想…..
+
+Here is an example of AppleScript
+	
+	def hello
+		puts "hello,Ruby"
+	end
+	
+*this is very simple*<!--who knows-->
+ 
+<div class="footer">
+        &copy; 2004 Wuhan Corporation
+ </div>
+
+

@@ -1,0 +1,15 @@
+---
+title: "new-post"
+date: "2011-11-13"
+comments: true
+categories: 
+---
+under the source folder of the octopress, run the command 
+	1. rake new_post['hahah']
+	2. rake generate
+    3. rake deploy
+	4. git add .
+	5. git commit  -m "New Post"
+	6. git push origin source(keep the file in the github)
+
+after that three steps, you will get the new post hahah in your site.
