@@ -1,3 +1,12 @@
+---
+title: "同时提交到两个仓库"
+date: "2019-04-19"
+comments: true
+tags: [GIT]
+
+
+---
+
 首先， 需要添加 metalist 仓库的地址(下面以 exchange-admin 为例)
 
 ```shell
