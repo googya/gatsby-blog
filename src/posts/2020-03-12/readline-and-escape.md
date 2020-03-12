@@ -1,7 +1,7 @@
 
 
 ---
-title: "在命令行下如何移动一个字符、一个单词"
+title:  "在命令行下如何移动一个字符、一个单词"
 date: "2020-03-12"
 comments: true
 tags: [read, escape, emacs]
