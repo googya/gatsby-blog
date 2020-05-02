@@ -172,9 +172,176 @@ nix-build default.nix
 
 
 
+### About Nix language (syntax):
+
+#### Types
+
+```nix
+with import <nixpkgs> {};
+with lib;
+{
+  ex00 = isAttrs {};
+  ex01 = isAttrs {};
+  ex03 = isString "a"; 
+  ex04 = isInt (-3); 
+  ex05 = isFunction (x: x);
+  ex06 = isString (x:x);
+  ex07 = isString ("x");
+  ex08 = isNull null; 
+  ex09 = isFunction (y: y+1);
+  ex10 = isList [({z}: z) (x: x)];
+  ex11 = isAttrs {a=[];};
+  ex12 = isInt (-10); # oh, what is that?
+}
+```
+
+
+
+#### Assertion
+
+```nix
+with import <nixpkgs> {};
+let
+  func = x: y: assert (x==2) || abort "x has to be 2 or it won't work!"; x + y;
+  n = -1;
+in
+
+assert (lib.isInt n) || abort "Type error since supplied argument is no int!";
+
+rec {
+  ex00 = func (n+3) 3;
+}
+```
+
+
+
+#### Debugging
+
+```nix
+
+let
+  #dummyfunctions
+  fetchurl = x: x;
+  ncurses = "ncurses";
+  gettext = "gettext";
+in
+rec {
+  pname = "nano";
+  version = "2.3.6";
+
+  name = "${pname}-${version}";
+
+  src = fetchurl {
+    url = "mirror://gnu/nano/${name}.tar.gz";
+    sha256 = "a74bf3f18b12c1c777ae737c0e463152439e381aba8720b4bc67449f36a09534";
+  };
+
+  buildInputs = [ ncurses gettext ];
+
+  configureFlags = "sysconfdir=/etc";
+
+  meta = {
+    homepage = http://www.nano-editor.org/;
+    description = "A small, user-friendly console text editor";
+  };
+}
+```
+
+
+
+#### Map
+
+```nix
+let
+  bar = ["bar" "foo" "bla"];
+  numbers = [1 2 3 4];
+in
+{
+  #multiplies every number by 2
+  example = map (n: n * 2) numbers; 
+  #complete this
+  foobar = map ( x: x + "bar" ) bar;
+}
+
+```
+
+
+
+#### Fold
+
+```nix
+with import <nixpkgs> { };
+let
+  list = ["a" "b" "a" "c" "d" "a"];
+  countA = lib.fold (x: y: if x == "a" then y + 1 else y) 0;
+in
+rec {
+  example = lib.fold (x: y: x + y) "" ["a" "b" "c"]; #is "abc"
+  result = countA list; #should be 3
+}
+
+# 
+with import <nixpkgs> { };
+let
+  listOfNumbers = [2 4 6 9 27];
+  reverseList = lib.fold (x: y: y ++ [x]) [];
+in
+rec {
+  example = lib.reverseList listOfNumbers;
+  result = reverseList listOfNumbers;
+}
+
+# implement myMap using lib.fold
+with import <nixpkgs> { };
+let
+  listOfNumbers = [2 4 6 9 27];
+  myMap = func: list: lib.fold (x: y: [(func x)] ++ y) [] list; 
+in
+rec {
+  #your map should create the same result as the standard map function
+  example = map (x: builtins.div x 2) listOfNumbers; 
+  result = myMap (x: builtins.div x 2) listOfNumbers;
+}
+```
+
+
+
+#### Reimplementation: attrVals
+
+```nix
+with import <nixpkgs> { };
+let
+  attrSet = {c = 3; a = 1; b = 2;};
+  #This is an example function that extracts a single value 
+  getSingleVal = (attrSet: x: attrSet.${x});
+
+  #tips: use the map function and access the attribute values 
+  #in the same way as 'getSingleVal'
+  attrVals = nameList: attrS: map (x: attrS.${x}) nameList;
+in
+rec {
+  example = getSingleVal attrSet "a"; #is [1]
+  solution = attrVals ["a" "b" "c"] attrSet; #should be [1 2 3]
+}
+```
+
+
+
+
+
+### Nix Repl
+
+```nix
+nix repl '<nixpkgs>'
+
+
+```
+
 
 
 ### references:
 
 [ Learn X in Y minutes ](https://learnxinyminutes.com/docs/nix/)
+
+[ A tour of Nix](https://nixcloud.io/tour/)
 
