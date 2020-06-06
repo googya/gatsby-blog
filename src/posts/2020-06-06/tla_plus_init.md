@@ -70,7 +70,7 @@ Next == \/ FillSmall
 
 
 
-![tla_result](https://raw.githubusercontent.com/googya/gatsby-blog/master/static/tla.png)
+![tla_result](https://raw.githubusercontent.com/googya/gatsby-blog/master/static/img/tla.png)
 
 
 
