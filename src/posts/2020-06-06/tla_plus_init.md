@@ -70,7 +70,7 @@ Next == \/ FillSmall
 
 
 
-![debug](/Users/kv/Library/Application Support/typora-user-images/image-20200606213514387.png)
+![debug](../../../static/tla.png)
 
 
 
