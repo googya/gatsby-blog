@@ -1,0 +1,36 @@
+---
+title: "git 基础"
+date: "2012-06-29"
+comments: true
+categories: 
+---
+简单的玩一下还可以，但一深入，就知道要了解的太多了！
+还得加强学习啊！
+
+
+* git fetch 
+	
+	仅仅是提取远端的内容，但是并不合并；
+	
+	如果只是想比较远端分支与当前分支有何异同，使用步骤如下：
+	
+		1、git fetch
+	
+		2、git log origin/master..HEAD
+	
+	
+	
+* git pull
+	
+	默认操作是merge操作，有可能会产生额外的commit， 但是信息可以完整保留
+	
+	--rebase选项， 是rebase的，fast-forward， 不会产生额外的commit， 但是信息保留不完整
+	--all 会将远端分支全部clone下来
+	
+	
+* git branch 
+	
+	-a 查看所有分支，包括本地和远端库的.
+	
+	
+	

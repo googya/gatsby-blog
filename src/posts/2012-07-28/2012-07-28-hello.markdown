@@ -1,0 +1,53 @@
+---
+title: "最好不把 octopress 的项目放到 dropbox 下"
+date: "2012-07-28"
+comments: true
+categories: 
+---
+fuck dropbox repos！
+
+之前把octopress的代码放到了Dropbox上，以为这样可以方便多台机器之间同步写blog，但是有很多问题，如果处理不好的话。
+
+
+***git的同步机制与Dropbox有不同，Dropbox会因为提交时间有差异，导致文件冲突。***
+	
+
+如果出现了冲突的问题，采用如下办法：
+
+
+* 1、删除主目录下.git目录中全部的冲突文件
+* 2、同时删除 _deploy目录下.git中全部冲突的文件
+
+
+
+***如果想在另外一台电脑上也能写blog的话，有一个常规的做法：***
+
+* 1、克隆你github上的source分枝：
+
+	git clone -b source git@github.com:googya/googya.github.com.git github_blog
+
+
+  注意不要使用如下写法：
+  
+		git clone -b source https://github.com/googya/googya.github.com.git github_blog
+		
+  采用这个写法，在提交代码的时候，会不断的提示你输入用户名和密码。参见：[Trobleshooting git push -it asks for a user/pass](http://stackoverflow.com/questions/5813726/troubleshooting-git-push-it-asks-for-a-user-pass)
+  
+  
+	
+* 2、需要使用rake命令，设置github的生成环境：
+    
+    rake setup_github_pages
+    
+    Enter the read/write url for your repository: git@github.com:googya/googya.github.com
+    
+    输入形如以上结构即可！
+    
+    
+    
+  		注： 当输入的是https而非git地址的时候，也有补救的机会：
+  		git remote set-url origin git@github.com:googya/googya.github.com
+  		
+  		
+  		
+  	参考[How to change a remote repository URI using Git?](http://stackoverflow.com/questions/2432764/how-to-change-a-remote-repository-uri-using-git)

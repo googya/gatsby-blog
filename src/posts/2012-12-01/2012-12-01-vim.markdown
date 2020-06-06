@@ -1,0 +1,37 @@
+---
+title: "vim,slime, tmux"
+date: "2012-12-01"
+comments: true
+categories: 
+---
+时光飞逝如电，转眼到了2012年12月1日了。哥至今仍家不成，业未立， 心中不免有些许惊慌，毕竟到了而立之年。回首向来处，皆是20岁的感觉，是心态仍然年轻，抑或幼稚如故？
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+早上看了一点关于slime-vim的东西，比较有意思的地方是与tmux的结合，这个plugin很早之前就存在于我的vimrc中，但基本没用过。于是想动动手，把vim slime tmux结合起来，试验的对象是ruby的irb。
+
+1、打开终端，建立一个tmux会话，一般我喜欢给它起名字，比如 
+		
+	tmux new -s irb
+	
+2、在终端中启动irb
+
+3、在另外一个终端中打开 vim， 输入一些ruby脚本，比如：
+
+	puts "hello, tmux"
+	
+4、C-c C-c，会提示你输入tmux的socket名字，一般是default就可以了，接着会提示输入tmux的window，pane信息，使用 "pry:1.0", 意思是 pry这个session的第一个window的第一个pane（这步的前提当然是安装了slime-vim, 使用方法Google之）。
+
+我在完成第四步的时候吃了很多亏，主要是我没看仔细看文档，而想当然的认为应该如此。主要梗在， slime-vim先要输入的是tmux的socket， 而后才是 会话，窗口，面板等东西，我想当然的认为第一个输入的应该是session（之前确实没有注意到socket的存在），于是反复的尝试，结果注定是失败。而后我尝试使用另外的一个专门针对tmux的vim插件，叫做 Slimux, 它使用很方便，一下子就成功了，而成功之后，我反过头去查看slime-vim的文档和源代码，发现我的理解有误，在输入socket的地方输入session，于是问题得到解决。
+
+查看socket的方法：
+			
+		lsof -U | grep "^grep"
+
+提到grep， 顺便说一句，GNU的grep据说要比osx的grep快上10倍，我机器上的grep已经是gnu的了。
+
+
+slime本来的emacs上的好用的工具，现在vim也可以使用上了，很不错。
+
+之前还一直因为这个想学Emacs呢，曾经在windows上使用Emacs，感觉巨爽，而换了osx之后，处于键盘的原因（我也不太习惯外接键盘）放弃了Emacs而专心的学习Vim，虽然vim也不是很熟悉，但基本够用。
+		
